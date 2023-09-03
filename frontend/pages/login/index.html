@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- login section -->
+    <div class="login-page">
+        <!-- left image section -->
+        <div class="left_side_image">
+            <img src="../../images/istockphoto-1426988809-1024x1024.jpg">
+        </div>
+        <div class="right_side_login_form">
+            <div>
+                <!-- welcome message -->
+                <div>
+                    <h3> Welcome Back </h3>
+                    <p>
+                        Welcome back! Please enter your details
+                    </p>
+
+                </div>
+
+                <!-- login form -->
+
+                <form>
+                    <!-- email  -->
+                    <div>
+                        <label for="mail">Email</label><br>
+                        <input type="email" name="email" id="mail" placeholder="Enter your email" required>
+                    </div>
+                    <!-- passsord -->
+                    <div>
+                        <label for="password">Password</label><br>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    <div>
+                        <button type="button" onclick="login()">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="../scripts/services/user.service.js"></script> -->
+    <script src="./index.js"></script>
+</body>
+
+</html>
