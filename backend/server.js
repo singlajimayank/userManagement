@@ -5,11 +5,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 // const publicBasePath = "../frontend/pages";
 
 // midddlwares
+app.use(express.static(path.join(__dirname, '../frontend/pages')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.static(path.join(__dirname, '../frontend/pages/login')));
 // app.use(express.static('public', { 'Content-Type': 'text/css' }));
 

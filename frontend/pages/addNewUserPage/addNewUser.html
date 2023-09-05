@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="addNewUser.css">
 </head>
+
 <body>
+    <!-- Page Header -->
     <label>Add New User</label>
+    <!-- User Input Fields -->
     <div>
         <span>Add Name</span>
-        <input type="text" name="name" id="name" placeholder="Enter name" required>
+        <!-- Input field for entering the user's name -->
+        <input class="small-input" type="text" name="name" id="name" placeholder="Enter name" required>
     </div>
     <div>
         <span>Add Email</span>
-        <input type="email" name="email" id="email" placeholder="Enter email" required>
+        <!-- Input field for entering the user's email -->
+        <input class="small-input" type="email" name="email" id="email" placeholder="Enter email" required>
     </div>
+    <!-- Button to Add User -->
     <button onclick="addUser()">Add User</button>
-    
+    <!-- Include the JavaScript file -->
     <script src="addNewUser.js"></script>
 </body>
+
 </html>

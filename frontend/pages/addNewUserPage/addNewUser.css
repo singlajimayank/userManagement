@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Page header styles */
+label {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* User input container styles */
+div {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Label styles for input fields */
+span {
+    font-weight: bold;
+}
+
+/* Input field styles */
+input[type="text"].small-input,
+input[type="email"].small-input {
+    width: 50%;
+    /* Occupies half of the container width */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    outline: none;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
