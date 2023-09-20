@@ -31,5 +31,5 @@ function addUser() {
     }
 
     // Redirect the user to the 'users' page
-    window.location.href = '../users/users.html';
+    window.location.href = '../user-list/users.html';
 }

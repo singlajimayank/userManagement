@@ -1,0 +1,75 @@
+/* Define CSS variables for reusable values */
+:root {
+    --btn-bg-primary-color: #007bff;
+    --btn-text-color: white;
+    --image-width: 50%;
+    --image-height: 650px;
+    --image-margin: auto;
+    --form-margin: 10px;
+    --label-margin: 2px;
+    --border-radius: 5px;
+    --sans-serif: sans-serif;
+}
+
+/* Login page styles */
+.login-page {
+    display: flex;
+}
+
+/* Left-side image styles */
+.left-side-image {
+    width: var(--image-width);
+}
+
+/* Image styles */
+img {
+    width: 100%;
+    height: var(--image-height);
+}
+
+/* Right-side login form styles */
+.right-side-login-form {
+    margin: var(--image-margin);
+}
+
+/* Welcome heading styles */
+.welcome-heading {
+    font-family: var(--sans-serif);
+    font-size: 25px;
+}
+
+/* Welcome text styles */
+.welcome-text {
+    font-family: var(--sans-serif);
+    font-size: large;
+}
+
+/* Input label styles */
+.input-label {
+    font-size: larger;
+}
+
+/* Styles for child div elements within .div2 */
+.div2 div {
+    margin: var(--form-margin) var(--form-margin) var(--form-margin) 0;
+}
+
+/* Form styles */
+form {
+    margin: var(--form-margin);
+}
+
+/* Button styles */
+.um-btn {
+    border: 1px solid black;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: initial;
+}
+
+/* Primary button styles */
+.um-btn.btn-primary {
+    background-color: var(--btn-bg-primary-color);
+    color: var(--btn-text-color);
+}

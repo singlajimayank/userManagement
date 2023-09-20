@@ -1,14 +1,35 @@
+/**
+ * Function to update the content of a dropdown menu with the user's username and email
+ * retrieved from localStorage.
+ */
+function updateDropdownContent() {
+    // Retrieve the stored username and email from localStorage
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+
+    // Get the HTML element where the username and email will be displayed
+    const usernameElement = document.getElementById('username');
+    const emailElement = document.getElementById('useremail');
+
+    // Check if the usernameElement andf emailElement exist in the DOM
+    if (usernameElement && emailElement) {
+        // Update the content with stored username and email
+        usernameElement.textContent = username;
+        emailElement.textContent = email;
+    }
+}
 // Function to populate the user table with user data
 function userTable() {
+    updateDropdownContent();
     // Reference the 'user-table' HTML element
     const table = document.querySelector(".user-table");
 
-    // const users = UserService.getUsers();
+    const users = UserService.getUsers();
     // Retrieve the email of the logged-in user from local storage
     let loginUserEmail = localStorage.getItem('email');
 
     // Loop through the list of users
-    UserService.users.forEach(user => {
+    users.forEach(user => {
         // Check if the user is not the currently logged-in user
         if (user.email !== loginUserEmail) {
             // Create a new row in the table
@@ -40,15 +61,18 @@ function userTable() {
         emailCell.textContent = user.email;
         nameCell.textContent = user.name;
     });
+
 }
+
 
 // Function to logout the user and redirect to the login page 
 function logout() {
-    // Clear all data stored in localStorage 
-    localStorage.clear();
+    // // Clear all data stored in localStorage 
+    // localStorage.clear();
+    AuthService.logout();
 
     // Redirect the user to the login page
-    window.location.href = '../login/index.html';
+    window.location.href = '../../login/login.html';
 }
 
 // Execute the userTable function when the DOM is fully loaded

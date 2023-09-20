@@ -1,35 +1,55 @@
-/* Prevent default margin and padding*/
+/* Define CSS variables for reusable values */
+:root {
+  --primary-bg-color: #f4f4f4;
+  --nav-bg-color: #333;
+  --nav-text-color: white;
+  --font-family: Arial, sans-serif;
+  --dropdown-bg-color: #333;
+  --dropdown-text-color: white;
+  --dropdown-hover-bg: #555;
+  --app-logo-font-size: 24px;
+  --nav-padding: 10px 20px;
+  --font-weight: bold;
+}
+
+/* Prevent default margin and padding */
 body,
 h1 {
   margin: 0;
   padding: 0;
 }
 
-/* Apply a background color */
+/* Apply a background color using a variable */
 body {
-  background-color: #f4f4f4;
-  font-family: Arial, sans-serif;
+  background-color: var(--primary-bg-color);
+  font-family: var(--font-family);
 }
 
 /* Style the navigation bar */
 nav {
-  background-color: #333;
-  color: white;
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: var(--nav-padding);
 }
 
 /* Make the text style on app-logo */
 .app-logo {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: var(--app-logo-font-size);
+  font-weight: var(--font-weight);
 }
 
+/* Add a top margin to nav-links */
+.nav-links {
+  margin-top: 5px;
+}
+
+/* Style links within .nav-links */
 .nav-links a {
-  color: white;
+  color: var(--nav-text-color);
   text-decoration: none;
-  margin-left: 20px;
+  margin-right: 60px;
 }
 
 /* Center content */
@@ -39,7 +59,6 @@ nav {
   align-items: center;
   justify-content: center;
   height: calc(100vh - 40px);
-  /*Account for top navigation padding */
 }
 
 /* Style the welcome message */
@@ -50,6 +69,71 @@ nav {
 
 /* Style the username */
 #welcome-username {
-  color: #333;
-  font-weight: bold;
+  color: var(--nav-bg-color);
+  font-weight: var(--font-weight);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the dropdown button (User) */
+.dropbtn {
+  background-color: var(--nav-bg-color);
+  color: var(--nav-text-color);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style the dropdown arrow */
+.dropdown-arrow {
+  margin-left: 5px;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+  margin: 20px 20px 20px 0;
+  display: none;
+  position: absolute;
+  background-color: var(--dropdown-bg-color);
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Style the dropdown items */
+.dropdown-content p,
+.dropdown-content a {
+  color: var(--dropdown-text-color);
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+/* Style the separator line */
+.dropdown-content hr {
+  margin: 5px 0;
+  border: none;
+  border-top: 1px solid #666;
+}
+
+/* Change the dropdown content to be visible on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style the logout link */
+.dropdown-content a:hover {
+  background-color: var(--dropdown-hover-bg);
+}
+
+/* Style the dropdown button */
+.dropbtn {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 10px;
+  line-height: 0;
 }

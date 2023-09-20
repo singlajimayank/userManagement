@@ -2,7 +2,8 @@
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="index.css">
+    <!-- Include the external CSS file for styling -->
+    <link rel="stylesheet" href="login.css">
 </head>
 
 <body>
@@ -16,35 +17,37 @@
             <div>
                 <!-- welcome message -->
                 <div>
-                    <h3> Welcome Back </h3>
-                    <p>
+                    <h3 class="welcome-heading"> Welcome Back </h3>
+                    <p class="welcome-text">
                         Welcome back! Please enter your details
                     </p>
-
                 </div>
 
                 <!-- login form -->
-
-                <form>
+                <form id="loginForm">
                     <!-- email  -->
                     <div>
-                        <label for="mail">Email</label><br>
+                        <label class="input-label" for="mail">Email</label><br>
                         <input type="email" name="email" id="mail" placeholder="Enter your email">
                     </div>
                     <!-- passsord -->
                     <div>
-                        <label for="password">Password</label><br>
+                        <label class="input-label" for="password">Password</label><br>
                         <input type="password" name="password" id="password">
                     </div>
                     <div>
-                        <button type="button" onclick="login()">Login</button>
+                        <!-- login button -->
+                        <button class="um-btn btn-primary" type="button" id="loginButton">Login</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <!-- Include JavaScript files for authentication and user services, as well as login functionality -->
+    <script src="../../services/auth.service.js"></script>
     <script src="../../services/user.service.js"></script>
-    <script src="./index.js"></script>
+    <script src="./login.js"></script>
 </body>
 
 </html>

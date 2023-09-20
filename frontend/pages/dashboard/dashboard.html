@@ -2,32 +2,43 @@
 
 <head>
     <title>User Dashboard</title>
+    <!-- Include the external CSS file for styling -->
     <link rel="stylesheet" href="dashboard.css">
-
 </head>
 
 <body>
-    <!-- Navigartion section at the top of the page -->
+    <!-- Navigation section at the top of the page -->
     <nav>
-        <!-- App-Name on left side -->
+        <!-- App-Name on the left side -->
         <div class="app-logo">User-management</div>
-        <!-- Links on right side -->
+        <!-- Links on the right side -->
         <div class="nav-links">
-            <!-- Link to the Home page i.e Login page -->
-            <a href="../login/index.html">Home</a>
-            <!-- Link to the Users page i.e table of users -->
-            <a href="../users/users.html">User</a>
+            <!-- Link to the Home page (dashboard) -->
+            <a href="./dashboard.html">Home</a>
+            <!-- User Dropdown Menu -->
+            <div class="dropdown">
+                <a class="dropbtn" href="../users/user-list/users.html">User &#9662;</a>
+                <div class="dropdown-content">
+                    <!-- Displayed username and useremail -->
+                    <p><span id="username">User</span></p>
+                    <p><span id="useremail">user@example.com</span></p>
+                    <hr>
+                    <!-- Logout option -->
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
         </div>
     </nav>
     <!-- Main content section of the page -->
     <div class="content">
         <div class="welcome-message">
             <!-- Heading that welcomes the user -->
-            <h1>Welcome, <span id="username"></span>!</h1>
+            <h1>Welcome, <span id="welcomeUsername">User</span>!</h1>
         </div>
     </div>
-
-    <!-- JavaScript code for enhancing functionality -->
+    <!-- Include JavaScript files for authentication and user services, as well as dashboard functionality -->
+    <script src="../../services/auth.service.js"></script>
+    <script src="../../services/user.service.js"></script>
     <script src="dashboard.js"></script>
 </body>
 

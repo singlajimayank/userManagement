@@ -1,17 +1,22 @@
 [
-    {
-        "email": "Sun@gmail.com",
-        "password": "0001",
-        "name": "Sunny"
-    },
-    {
-        "email": "May@gmail.com",
-        "password": "5678",
-        "name": "Mayank"
-    },
-    {
-        "email": "Pri@gmail.com",
-        "password": "rusk",
-        "name": "Prince"
-    }
+  {
+    "email": "Sun@gmail.com",
+    "password": "0001",
+    "name": "Sunny"
+  },
+  {
+    "email": "May@gmail.com",
+    "password": "5678",
+    "name": "Mayank"
+  },
+  {
+    "email": "MAYANK@gmail.com",
+    "password": "rusk",
+    "name": "Singla"
+  },
+  {
+    "email": "anmol@gmail.com",
+    "password": "789",
+    "name": "grewal"
+  }
 ]
