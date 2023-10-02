@@ -1,12 +1,13 @@
-
 class UserService {
-    static users = [
-        { email: "Sun@gmail.com", password: "0001", name: "Sunny" },
-        { email: "May@gmail.com", password: "5678", name: "Mayank" },
-        { email: "Pri@gmail.com", password: "rusk", name: "Prince" },
-    ];
+
     static getUsers() {
-        return UserService.users;
+
+        return axios.get(`${CONFIG.API_SERVER_URL}/api/users`)
+            .then(response => response.data)
+            .catch(error => {
+                console.log("Error getting resources", error);
+                throw error;
+            });
 
     }
 }

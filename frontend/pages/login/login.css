@@ -50,13 +50,16 @@ img {
 }
 
 /* Styles for child div elements within .div2 */
-.div2 div {
+/* .div2 div {
     margin: var(--form-margin) var(--form-margin) var(--form-margin) 0;
-}
+} */
 
 /* Form styles */
 form {
-    margin: var(--form-margin);
+    /* margin: var(--form-margin); */
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 /* Button styles */
