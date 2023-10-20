@@ -1,4 +1,3 @@
-// import AuthService from "../../services/auth.service";
 /**
  * Get Value of passed element name from dom
  * @param {string} elId 
@@ -17,21 +16,16 @@ async function login() {
     const password = getElValue("password");
     if (useremail && password) {
         try {
-            const user =await AuthService.login(useremail, password);
+            const user = await AuthService.login(useremail, password);
             // If a matching user is found
-            if (user) {
-                // Store the username  and email in localStorage
-                localStorage.setItem('username', user.name);
-                localStorage.setItem('email', useremail);
-                // Redirect the user to the dashboard page
-                window.location.href = '../dashboard/dashboard.html';
-            } else {
-                alert("Invalid Credentials");
-            }
-
+            // Store the username  and email in localStorage
+            localStorage.setItem('username', user.data.name);
+            localStorage.setItem('email', useremail);
+            // Redirect the user to the dashboard page
+            window.location.href = '../dashboard/dashboard.html';
         } catch (error) {
             console.error("Error:", error);
-            alert("An error occurred while logging in");
+            alert("Invalid Creds");
         }
     }
 }

@@ -1,40 +1,33 @@
-const fs = require('fs/promises');
-const path = require('path');
+const User = require('../models/users.models');
 
 class UserService {
-    static async readUserData() {
-        const filePath = path.join(__dirname, '../data', 'users.json');
-        const userData = await fs.readFile(filePath, 'utf-8');
-        return JSON.parse(userData);
-    }
-
     static async getUser(email) {
-        const users = await this.readUserData();
-
-        // Find the user with the matching email
-        const user = users.find((user) => user.email === email);
-
-        return user || null;
+        try {
+            const users = await User.findOne({ email: email });
+            return users;
+        } catch (error) {
+            console.log('Error getting user:', error.message);
+            throw error;
+        }
     }
 
-    static async getFilteredUsers(name, email) {
+    static async getFilteredUsers({ email, name, page, limit, sorting }) {
         try {
-            const users = await this.readUserData();
-            let filteredUsers = users;
-
-            if (name) {
-                filteredUsers = filteredUsers.filter((user) =>
-                    user.name.toLowerCase() === name.toLowerCase()
-                );
-            }
-
+            const pipeline = [];
             if (email) {
-                filteredUsers = filteredUsers.filter((user) =>
-                    user.email.toLowerCase() === email.toLowerCase()
-                );
+                pipeline.push({ $match: { email: email } });
             }
-
-            return filteredUsers;
+            if (name) {
+                pipeline.push({ $match: { name: name } });
+            }
+            if (page && limit) {
+                pipeline.push({ $skip: (page - 1) * limit });
+                pipeline.push({ $limit: limit });
+            }
+            if (sorting) {
+                pipeline.push({ $sort: { [sorting]: 1 } });
+            }
+            return await User.aggregate(pipeline);
         } catch (error) {
             console.log(error);
             throw error;
@@ -42,22 +35,13 @@ class UserService {
     }
     static async createUser(email, password, name) {
         try {
-            const filePath = path.join(__dirname, '../data', 'users.json');
-            const users = await this.readUserData();
-
-            const newUserId = users.length + 1;
-
-
-            const newUser = {
-                id: newUserId,
+            const newUser = await User.create({
                 email,
                 password,
                 name,
-            };
-
-            users.push(newUser);
-            await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf-8');
-            return newUser;
+            });
+            const count = await User.countDocuments({});
+            return { newUser, count };
         } catch (error) {
             console.log('Error creating user:', error.message);
             throw error;
@@ -65,41 +49,18 @@ class UserService {
     }
     static async updateUser(userId, updatedData) {
         try {
-            const filePath = path.join(__dirname, '../data', 'users.json');
-            const users = await this.readUserData();
-
-            //Find the index of the user with the matching id
-            const userIndex = users.findIndex((user) => user.id === userId);
-
-            if (userIndex === -1) {
-                // throw new error('User Id not found');
-                return null;
-            }
-
-            //Update the user's information
-            const updatedUser = { ...users[userIndex], ...updatedData };
-            users[userIndex] = updatedUser;
-
-            // Save the updated user data back to the file
-            await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf-8');
-            return updatedUser;
+            const updatedUser = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+            const count = await User.countDocuments({});
+            return { updatedUser, count };
         } catch (error) {
-            console.log('Error updating user:', error.message);
+            console.log('Error Updating User:', error.message);
             throw error;
         }
     }
 
     static async deleteUser(userId) {
         try {
-            const filePath = path.join(__dirname, '../data', 'users.json');
-            const users = await this.readUserData();
-
-            const userIndex = users.findIndex((user) => user.id === userId);
-            if (userIndex === -1) {
-                return null;
-            }
-            users.splice(userIndex, 1);
-            await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf-8');
+            return await User.findByIdAndDelete(userId);
         } catch (error) {
             console.log('Error deleting user:', error.message);
             throw error;

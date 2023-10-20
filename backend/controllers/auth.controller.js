@@ -1,9 +1,5 @@
-const dotenv = require('dotenv');
-const jwt = require('jsonwebtoken');
 const UserService = require('../services/users.service');
-
-dotenv.config();
-let jwtSecretKey = process.env.JWT_SECRET_KEY;
+const AuthService = require('../services/auth.service');
 
 
 exports.login = async (req, res) => {
@@ -16,8 +12,10 @@ exports.login = async (req, res) => {
 
         const user = await UserService.getUser(email);
         if (user && user.password === password) {
-            const token = jwt.sign({ email: user.email }, jwtSecretKey, { expiresIn: '1h' });
-            return res.status(200).json({ message: 'Authentication successful', token });
+            const token = AuthService.createToken(user.email);
+            const userWithoutPassword = { ...user._doc };
+            delete userWithoutPassword.password;
+            return res.status(200).json({ data: userWithoutPassword, message: 'Authentication successful', token });
         }
         else {
             return res.status(401).json({ error: 'Authentication failed' });

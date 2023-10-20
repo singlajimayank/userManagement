@@ -1,41 +1,29 @@
-const express = require('express');
-const path = require('path');
-const { userController, authController } = require('./controllers/api-controllers');
-const jwt = require('jsonwebtoken');
-
-
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const express = require('express');
+const path = require('path');
+
+const apiRoutes = require('./routes/api-routes');
+const AuthService = require('./services/auth.service');
+
 const app = express();
 const port = process.env.PORT || 8000;
-const jwtSecretKey = process.env.JWT_SECRET_KEY;
-
-/**
- * Middleware to check the validity of a JWT token.
- * Verifies the provided JWT token in the request headers.
-*/
-const checkToken = async (req, res, next) => {
-    const token = req.headers.authorization;
-    if (!token) {
-        return res.status(400).json({ message: 'A token is required for authentication' });
-    }
-    try {
-        const decoded = jwt.verify(token, jwtSecretKey);
-        req.user = decoded;
-        return next();
-    } catch (error) {
-        res.status(401).json({ error: 'Unauthorized' })
-    }
-}
 
 
 // midddlwares
 app.use(express.json());
+app.use('/api', AuthService.checkToken);
+
+// static 
 app.use(express.static(path.join(__dirname, '../frontend/pages')));
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.static(path.join(__dirname, '../frontend/pages/login')));
 app.use(express.static(path.join(__dirname, './backend/data')));
+
+// 
+app.use(apiRoutes);
 
 
 // routes
@@ -44,33 +32,13 @@ app.get('/', (_req, res) => {
     res.sendFile(filePath);
 });
 
-/**
- * POST request to authenticate a user and generate a JWT token.
- * Requires email and password in the request body.
- * Returns a JWT token on successful authentication.
- */
-app.post('/auth/login', authController.login);
-
-/**
- * GET request to fetch a list of users.
- */
-app.get('/api/users', userController.getUser);
-
-/**
- * POST request to create a new user.
- */
-app.post('/api/users', userController.createUser);
-
-/**
- * PATCH request to update a user's information by ID.
- */
-app.patch('/api/users/:id', userController.updateUser);
-
-/**
- * DELETE request to delete a user by ID.
- */
-app.delete('/api/users/:id', checkToken, userController.deleteUser);
-
+mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log('DB Connection Successful');
+}).catch((error) => {
+    console.log(error);
+})
 
 
 app.listen(port, (err) => {

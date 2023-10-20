@@ -1,25 +1,14 @@
 class AuthService {
 
     static async login(email, password) {
-        try {
-            const users = await UserService.getUsers();
-            const user = users.find(user => user.email === email && user.password === password);
-
-            if (user) {
-                // Only return the user if credentials match
-                console.log("User found:", user);
-                return user;
-            } else {
-                // Return null for invalid credentials
-                console.log("User not found for credentials:", email, password);
-                return null;
-            }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
-            return null;
-        }
-
+        return axios.post(`${CONFIG.API_SERVER_URL}/auth/login`, { email, password })
+            .then((res) => {
+                // save token on localstorage or in cookies to use in other apis
+                localStorage.setItem('token', res.data.token);
+                return res.data;
+            });
     }
+
     static logout() {
         localStorage.clear();
     }
