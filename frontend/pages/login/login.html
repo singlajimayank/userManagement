@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <!-- Include the external CSS file for styling -->
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <!-- login section -->
+    <div class="login-page">
+        <!-- left image section -->
+        <div class="left-side-image">
+            <img src="../../images/istockphoto-1426988809-1024x1024.jpg">
+        </div>
+        <div class="right-side-login-form">
+            <div>
+                <!-- welcome message -->
+                <div>
+                    <h3 class="welcome-heading"> Welcome Back </h3>
+                    <p class="welcome-text">
+                        Welcome back! Please enter your details
+                    </p>
+                </div>
+
+                <!-- login form -->
+                <form id="loginForm">
+                    <!-- email  -->
+                    <div>
+                        <label class="input-label" for="mail">Email</label><br>
+                        <input type="email" name="email" id="mail" placeholder="Enter your email">
+                    </div>
+                    <!-- passsord -->
+                    <div>
+                        <label class="input-label" for="password">Password</label><br>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div>
+                        <!-- login button -->
+                        <button class="um-btn btn-primary" type="button" id="loginButton">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include JavaScript files for authentication and user services, as well as login functionality -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../config.js"></script>
+    <script src="../../services/auth.service.js"></script>
+    <script src="../../services/user.service.js"></script>
+    <script src="./login.js"></script>
+</body>
+
+</html>

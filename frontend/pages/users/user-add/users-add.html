@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title> Add user </title>
+    <!-- Include the external CSS file for styling -->
+    <link rel="stylesheet" href="./users-add.css">
+</head>
+
+<body>
+    <!-- Page Header -->
+    <label>Add New User</label>
+    <!-- User Input Fields -->
+    <div>
+        <span>Add Name</span>
+        <!-- Input field for entering the user's name -->
+        <input class="small-input" type="text" name="name" id="name" placeholder="Enter name" required>
+    </div>
+    <div>
+        <span>Add Email</span>
+        <!-- Input field for entering the user's email -->
+        <input class="small-input" type="email" name="email" id="email" placeholder="Enter email" required>
+    </div>
+    <!-- Button to Add User -->
+    <button class="um-btn btn-primary" onclick="addUser()">Add User</button>
+    <!-- Include the JavaScript file -->
+    <script src="./users-add.js"></script>
+</body>
+
+</html>
