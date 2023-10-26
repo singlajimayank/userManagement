@@ -1,11 +1,16 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+    // email of the user and sholuld be unique
     email: String,
     password: String,
-    name: String,
+    name: String
+}, {
+    // timestampps enable
+    timestamps: true
+    // createdBy, updatedBy -> userId -> reference user id foreign keys
 });
 
-const User = mongoose.model('User', userSchema);
+const UserModel = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = UserModel;

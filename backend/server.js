@@ -33,12 +33,13 @@ app.get('/', (_req, res) => {
 });
 
 mongoose.connect(process.env.DB_URL, {
+    // comment
     useNewUrlParser: true
 }).then(() => {
     console.log('DB Connection Successful');
 }).catch((error) => {
-    console.log(error);
-})
+    console.error("Unable to connect to MongoDB", error);
+});
 
 
 app.listen(port, (err) => {

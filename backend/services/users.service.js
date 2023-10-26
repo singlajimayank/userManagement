@@ -1,49 +1,67 @@
 const User = require('../models/users.models');
 
 class UserService {
-    static async getUser(email) {
+
+    /**
+     * Get user by email with password.
+     * @param {string} email Email of user 
+     * @returns {Promise<{email, name}>}
+     */
+    static async getUserWithPassword({ email }) {
         try {
-            const users = await User.findOne({ email: email });
-            return users;
+            return User.findOne({ email });
         } catch (error) {
-            console.log('Error getting user:', error.message);
+            console.error('Error getting user:', error.message);
             throw error;
         }
     }
 
-    static async getFilteredUsers({ email, name, page, limit, sorting }) {
+    /**
+     * Get filtered users
+     * @param {{ email, name, page, limit, sorting }} filter 
+     * @returns {Promise<{data : Array<{name, email, createdOn, createdBy}, dataCount>}>}
+     */
+    static async getUsers(filter) {
         try {
-            const pipeline = [];
-            if (email) {
-                pipeline.push({ $match: { email: email } });
+            const pipeline = [{ $match: {} }];
+            if (filter.email) {
+                pipeline[0].$match.email = filter.email;
             }
-            if (name) {
-                pipeline.push({ $match: { name: name } });
+            if (filter.name) {
+                pipeline[0].$match.name = filter.email;
             }
-            if (page && limit) {
-                pipeline.push({ $skip: (page - 1) * limit });
-                pipeline.push({ $limit: limit });
+            if (filter.page && filter.limit) {
+                pipeline.push({ $skip: (filter.page - 1) * filter.limit });
+                pipeline.push({ $limit: filter.limit });
             }
-            if (sorting) {
-                pipeline.push({ $sort: { [sorting]: 1 } });
+            if (filter.sorting) {
+                pipeline.push({ $sort: { [filter.sorting]: 1 } });
             }
-            return await User.aggregate(pipeline);
+            const responses = await Promise.all([User.aggregate(pipeline)]);
+
+            return { data: responses[0], dataCount: responses[1] }
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching users data:', error.message);
             throw error;
         }
     }
-    static async createUser(email, password, name) {
+
+    /**
+     * Create a new user 
+     * @param {{ email, password, name }} user data for creating new user
+     * @returns {Promise<{newUser}>}
+     */
+    static async createUser({ email, password, name }) {
         try {
             const newUser = await User.create({
-                email,
-                password,
-                name,
+                email, password, name,
             });
-            const count = await User.countDocuments({});
-            return { newUser, count };
+
+            delete newUser.password;
+
+            return { newUser };
         } catch (error) {
-            console.log('Error creating user:', error.message);
+            console.error('Error creating user:', error.message);
             throw error;
         }
     }
@@ -53,7 +71,7 @@ class UserService {
             const count = await User.countDocuments({});
             return { updatedUser, count };
         } catch (error) {
-            console.log('Error Updating User:', error.message);
+            console.error('Error Updating User:', error.message);
             throw error;
         }
     }
@@ -62,7 +80,7 @@ class UserService {
         try {
             return await User.findByIdAndDelete(userId);
         } catch (error) {
-            console.log('Error deleting user:', error.message);
+            console.error('Error deleting user:', error.message);
             throw error;
         }
     }

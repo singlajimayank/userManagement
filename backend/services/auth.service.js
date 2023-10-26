@@ -1,9 +1,6 @@
-const dotenv = require('dotenv');
-dotenv.config();
 const jwt = require('jsonwebtoken');
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
-
 
 class AuthService {
     static PUBLIC_URLS = ['/auth/login'];

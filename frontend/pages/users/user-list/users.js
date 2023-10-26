@@ -29,7 +29,7 @@ async function userTable() {
         let loginUserEmail = localStorage.getItem('email');
 
         // Loop through the list of users
-        users.forEach(user => {
+        users.data.forEach(user => {
             // Check if the user is not the currently logged-in user
             if (user.email !== loginUserEmail) {
                 // Create a new row in the table

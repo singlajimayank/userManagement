@@ -9,6 +9,8 @@ The backend of this project is responsible for handling server-side operations, 
 ### Server.js
 `server.js` is the main server file responsible for initializing and running the backend server.It sets up the Express.js server, configures middleware, and defines routes for the project.
 
+To start the project we need to make a copy of .env.sample and rename as .env and fill the all values with actual secrets.
+
 ## Frontend
 
 The frontend of this project handles the user interface, including web pages and client-side logic. It uses HTML, CSS, and JavaScript to create a responsive and interactive user experience.
