@@ -20,7 +20,7 @@ function addUser() {
         else {
             // If 'addedUsers' key exists, retrieve the existing array from local storage
             addedUsers = JSON.parse(localStorage.getItem('addedUsers'));
-             // Add the current user to the array
+            // Add the current user to the array
             addedUsers.push({
                 name: nameValue,
                 email: emailValue

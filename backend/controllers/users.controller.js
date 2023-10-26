@@ -26,12 +26,12 @@ class UsersController {
             }
 
             // Check if a user with the provided email already exists
-            // const existingUser = await UserService.getUser(email);
+            const existingUser = await UserService.getUserWithPassword({ email });
 
             // If a user with the same email is found, respond with an error
-            // if (existingUser) {
-            //     return res.status(400).json({ error: 'Email is already in use' });
-            // }
+            if (existingUser) {
+                return res.status(400).json({ error: 'Email is already in use' });
+            }
 
             // Create a new user using the UserService
             const { newUser } = await UserService.createUser({ email, password, name });

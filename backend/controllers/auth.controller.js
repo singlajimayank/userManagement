@@ -19,7 +19,7 @@ class AuthController {
                 return res.status(401).json({ error: 'Authentication failed' });
             }
         } catch (error) {
-            console.error(error);
+            console.error(`Unable to login with email: ${email}`, error);
             return res.status(500).json({ error: 'Internal server error' });
         }
     }

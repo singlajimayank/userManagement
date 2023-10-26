@@ -65,6 +65,13 @@ class UserService {
             throw error;
         }
     }
+
+    /**
+     * 
+     * @param {string} userId 
+     * @param {{ email?, password?, name? }} updatedData 
+     * @returns {Promise<{ updateUser, count }>}
+     */
     static async updateUser(userId, updatedData) {
         try {
             const updatedUser = await User.findByIdAndUpdate(userId, updatedData, { new: true });
@@ -76,6 +83,11 @@ class UserService {
         }
     }
 
+    /**
+     * 
+     * @param {string} userId 
+     * @returns {Promise<{Deleted Document}>}
+     */
     static async deleteUser(userId) {
         try {
             return await User.findByIdAndDelete(userId);
